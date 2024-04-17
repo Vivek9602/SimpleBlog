@@ -1,0 +1,31 @@
+﻿@model IEnumerable<SimpleBlog.Models.BlogPost>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1>Blog Posts</h1>
+<a href="@Url.Action("Create", "BlogPosts")" class="btn btn-primary mb-2">Add New Post</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                <td>@Html.DisplayFor(modelItem => item.Author)</td>
+                <td>@Html.DisplayFor(modelItem => item.PublicationDate.ToShortDateString())</td>
+                <td>
+                    <a href="@Url.Action("Edit", "BlogPosts", new { id = item.Id })" class="btn btn-success">Edit</a>
+                    <a href="@Url.Action("Delete", "BlogPosts", new { id = item.Id })" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
